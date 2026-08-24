@@ -20,16 +20,34 @@ app.post('/api/chat', async(req , res) => {
         const response = await client.chat.completions.create({
             model: "openai/gpt-oss-120b",
             messages: [
-                { role: "system", content: "You are a helpful assistant." },
+                { 
+                    
+                role: "system", 
+
+                content: `You are an expert AI. You MUST reply STRICTLY in JSON format. 
+                    Do not add any other text. 
+                    Use this exact JSON structure:
+                    {
+                        "title": "Short title of the topic",
+                        "explanation": "Detailed explanation",
+                        "confidence_score": 95
+                    }` 
+                 },
                 { role: "user", content: userQuestion }
             ],
-            temperature: 0.5,
-            max_tokens: 300
+            temperature: 0.7,
+            top_p:0.9,
+            frequency_penalty:0.5,
+            presence_penalty:0.5,
+            response_format:{type:"json_object"}
         });
         
-        const aiAnswer = response.choices[0].message.content;    
-        const aiThinking = response.choices[0].message.reasoning;
-        res.json({success: true, answer: aiAnswer, thinking: aiThinking});
+        const aiRawAnswer = response.choices[0].message.content;
+        const structdata = JSON.parse(aiRawAnswer);
+        res.json({
+            success:true,
+            data: structdata
+        }) ;  
 
     } catch (error) {
         console.error(" Error:", error.message);
