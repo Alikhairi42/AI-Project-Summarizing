@@ -1,3 +1,4 @@
+"use strict";
 require('dotenv').config();
 const OpenAI = require("openai");
 const cors = require('cors');
@@ -9,7 +10,7 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 const client = new OpenAI({
-    apiKey: precess.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
     baseURL: "https://api.groq.com/openai/v1"
 })
 
@@ -21,16 +22,15 @@ app.post('/api/stream', async(req,res)=>{
     res.setHeader('Transfer-Encoding','chunked');
 
     try{
+         const fullMessages = [
+            { role: "system",
+                content: "You are a friendly Moroccan AI. Always reply clearly using short paragraphs and bold text for key words. If the user speaks Moroccan Darija, reply in Darija."
+            },
+            ...userQuestion
+         ]
         const stream = await client.chat.completions.create({
             model: "openai/gpt-oss-120b",
-            message:[
-                {role: "system",
-                    content: "You are a helpful AI. Answer in a friendly way."
-                },
-                {
-                    role: "user",content, userQuestion
-                }
-            ],
+            messages: fullMessages,
             stream: true,
             temperature:0.7
         });
