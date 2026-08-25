@@ -21,7 +21,6 @@ async function askAI(){
         
         if(data.success)
         {
-            // 🚨 Fix: Derna O kbira hna bash t-matcha m3a l-t7t!
             const resultObj = data.data; 
 
             document.getElementById("answerText").innerHTML = `
