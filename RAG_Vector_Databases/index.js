@@ -1,6 +1,6 @@
 const { pipeline, env } = require('@xenova/transformers');
 
-env.backends.onnx.wasm.numThreads = 1;
+env.cacheDir = '/home/a-khairi/.cache/xenova-transformers';
 
 function cosineSimilarity(vect1, vect2){
     let dotProduct = 0; 
@@ -11,7 +11,7 @@ function cosineSimilarity(vect1, vect2){
 }
 
 async function runMiniRaG(){
-    console.log("⏳ Start model (Had L-Merra ghay-khdem!)...\n");
+    console.log("start model...\n");
 
     const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
 
@@ -29,10 +29,10 @@ async function runMiniRaG(){
         vectdb.push({text: doc, embedding: vector});
     }
 
-    console.log("✅ Fix data\n");
+    console.log("Fix data\n");
 
-    const userQuery = "What is the capital of Morocco?";
-    console.log(`🔎 S-Sou2al: "${userQuery}"`);
+    const userQuery = "What is javaScripte";
+    console.log(`Q: "${userQuery}"`);
     
     const queryResult = await extractor(userQuery, { pooling: 'mean', normalize: true });
     const queryVector = Array.from(queryResult.data);
@@ -40,17 +40,17 @@ async function runMiniRaG(){
     let bestMatch = null;
     let highestScore = -1;
     
-    for (let item of vectdb) {
-        const score = cosineSimilarity(queryVector, item.embedding);
-        console.log(`   - Score: ${(score * 100).toFixed(1)}% | Text: "${item.text}"`);
-
+    for (let ali of vectdb) {
+        const score = cosineSimilarity(queryVector, ali.embedding);
+        console.log(`   - Score: ${(score * 100).toFixed(1)}% | Text: "${ali.text}"`);
+        console.log(score);
         if (score > highestScore) {
             highestScore = score;
-            bestMatch = item.text;
+            bestMatch = ali.text;
         }
     }
 
-    console.log(`\n🏆 A9rab Jawab Lqnah f L-DB: "${bestMatch}"`);
+    console.log(`\nA9rab Jawab Lqnah f L-DB: "${bestMatch}"`);
 }
 
 runMiniRaG();
