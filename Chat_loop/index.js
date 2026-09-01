@@ -9,6 +9,7 @@ const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
     baseURL: "https://api.groq.com/openai/v1"
 });
+
 let history =[];
 async function askAI() {
     let full = "";

@@ -14,6 +14,7 @@ const client = new OpenAI({
     baseURL: "https://api.groq.com/openai/v1"
 })
 
+
 app.post('/api/stream', async(req,res)=>{
 
     const userQuestion = req.body.question;
