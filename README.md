@@ -1,48 +1,44 @@
-# AI Project — Learning & Experiments
+```markdown
+# AI Project — Learning Notes & Examples
 
-Hada repo khdmtu bash nt3llm 3la AI: theory w practice. Fih examples sghrin, experiments, w scripts bash tjeu ttaalam w tjarrab APIs.
+This repository is a personal learning playground for experimenting with AI concepts and small end-to-end examples. It contains short demos, scripts, and web examples to explore theory and practice.
 
-Purpose
-- Practice and collect small AI experiments (Node.js scripts, demos, simple integrations).
+## What I learned (high-level)
+- **Fundamentals:** basic concepts of LLMs, embeddings, and vector search (how retrieval-augmented generation works).
+  - *Resource:* [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings)
+- **API usage:** calling LLM APIs from Node.js, managing API keys via environment variables, and handling streaming responses.
+  - *Resource:* [OpenAI Node.js SDK](https://github.com/openai/openai-node)
+- **Function calling:** implementing helper functions / agents to structure outputs and call external tools.
+  - *Resource:* [OpenAI Function Calling Docs](https://platform.openai.com/docs/guides/function-calling)
+- **RAG & Vector DBs:** indexing documents, creating embeddings, and retrieving context for better answers.
+  - *Resource:* [Supabase Vector (pgvector) Docs](https://supabase.com/docs/guides/ai)
+- **Browser demos:** simple client-side memory experiments and UI patterns for conversational memory.
+  - *Resource:* [Vercel AI SDK Core](https://sdk.vercel.ai/docs/introduction)
 
-Repository structure
-- `Chat_loop/` — simple chat example using env API key.
-- `Chat_Memory/` — browser demo and scripts for memory experiments.
-- `Function_Calling_Tools/` — helper agent integrations.
-- `RAG_Vector_Databases/` — RAG experiments and PDF insertion scripts.
-- `Streaming_Responses/` — streaming examples and server.
-- `Use_vercel_ai/` — small Vercel/AI integration examples.
+## Repository structure
+- `Chat_loop/` — simple Node.js chat loop example that reads `OPENAI_API_KEY` from the environment.
+- `Chat_Memory/` — browser demo and scripts demonstrating conversational memory concepts.
+- `Function_Calling_Tools/` — small agent and function-calling helper code.
+- `RAG_Vector_Databases/` — experiments for RAG workflows and a PDF insert script using Supabase.
+- `Streaming_Responses/` — server and client examples for streaming model outputs.
+- `Use_vercel_ai/` — short Vercel/AI integration example.
 
-Quick start
-1. Install Node.js (v16+ recommended).
-2. From the repo root, install dependencies if a folder has a `package.json`:
+## How I tested things
+Run each example folder that has a `package.json`:
 
 ```bash
-cd <folder-with-package-json>
+cd <folder>
 npm install
+node index.js   # or follow the folder's README if present
 ```
 
-3. Provide API keys via environment variables (do NOT commit them). Example keys used in code:
-- `OPENAI_API_KEY`
-- `GEMINI_API_KEY`
-- `SUPABASE_URL` and `SUPABASE_KEY`
+Provide API keys locally (do NOT commit them): set `OPENAI_API_KEY`, `GEMINI_API_KEY`, `SUPABASE_URL`, `SUPABASE_KEY` as needed.
 
-Create a `.env` locally (not committed) or export vars in your shell:
+## Security & best practices
+- Keep API keys out of source control. The repo already includes a `.gitignore` ignoring `.env` and `.env.*`.
+- Prefer environment variables or a local `.env` file (excluded by git) when running examples.
 
-```bash
-export OPENAI_API_KEY="sk-..."
-export GEMINI_API_KEY="..."
-```
-
-Notes on git and secrets
-- The repository already ignores environment files via [.gitignore](.gitignore).
-- I checked for committed `.env` files — none are present. Keep sensitive keys out of the repo.
-
-Contributing
-- This repo is for learning. Feel free to copy, modify, and experiment.
-
-If you want, I can:
-- run quick tests or try an example script
-- add a small CONTRIBUTING.md or examples with step-by-step runs
-
-Enjoy experimenting!
+## Next steps I recommend
+- Add short READMEs inside folders with exact run commands and minimal `package.json` files for easier testing.
+- Add small automated smoke tests to verify examples run with dummy tokens or mocks.
+- Create a `CONTRIBUTING.md` describing how to safely add experiments without leaking secrets.
