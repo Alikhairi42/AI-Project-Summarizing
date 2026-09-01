@@ -3,6 +3,7 @@ const OpenAI = require('openai');
 const readline = require('readline/promises');
 const { stdin: input, stdout: output } = require('process');
 
+
 const rl = readline.createInterface({ input, output });
 
 const client = new OpenAI({
