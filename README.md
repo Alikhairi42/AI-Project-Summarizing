@@ -37,8 +37,3 @@ Provide API keys locally (do NOT commit them): set `OPENAI_API_KEY`, `GEMINI_API
 ## Security & best practices
 - Keep API keys out of source control. The repo already includes a `.gitignore` ignoring `.env` and `.env.*`.
 - Prefer environment variables or a local `.env` file (excluded by git) when running examples.
-
-## Next steps I recommend
-- Add short READMEs inside folders with exact run commands and minimal `package.json` files for easier testing.
-- Add small automated smoke tests to verify examples run with dummy tokens or mocks.
-- Create a `CONTRIBUTING.md` describing how to safely add experiments without leaking secrets.
