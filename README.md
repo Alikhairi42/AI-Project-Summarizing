@@ -1,5 +1,7 @@
 ```markdown
 
+
+
 # AI Project — Learning Notes & Examples
 
 This repository is a personal learning playground for experimenting with AI concepts and small end-to-end examples. It contains short demos, scripts, and web examples to explore theory and practice.
